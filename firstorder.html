@@ -4,11 +4,24 @@
 		<title>geirmundM</title>
 		<script src="common.js"></script>
 		<script src="firstorder.js"></script>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body onload="firstorder_onload()">
 		<nav id="nav1"></nav>
 		<h2>First order element</h2>
 		<svg id="svg1" width="1200" height="900">
+			<text x="100" y="150" fill="black">x</text>
+			<text x="450" y="150" fill="black">y</text>
+			<line x1="100" y1="100" x2="200" y2="100" stroke="black" stroke-width="2" />
+			<line x1="250" y1="100" x2="450" y2="100" stroke="black" stroke-width="2" />
+			<line x1="100" y1="200" x2="450" y2="200" stroke="black" stroke-width="2" />
+			<!--Resistor-->
+			<rect x="200" y="90" width="50" height="20" stroke="black" stroke-width="2" fill="white" />
+			<!--Condenser-->
+			<line x1="350" y1="100" x2="350" y2="145" stroke="black" stroke-width="2" />
+			<line x1="325" y1="145" x2="375" y2="145" stroke="black" stroke-width="2" />
+			<line x1="325" y1="155" x2="375" y2="155" stroke="black" stroke-width="2" />
+			<line x1="350" y1="155" x2="350" y2="200" stroke="black" stroke-width="2" />
 		</svg>
 	</body>
 </html>

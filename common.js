@@ -11,5 +11,5 @@ function index_onload() {
 // firstorder.html body onload event
 function firstorder_onload() {
 	loadNavigation();
-	firstorderMain();
+	firstorderPlot();
 }

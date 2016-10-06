@@ -1,23 +1,27 @@
-function firstorderMain() {
+function firstorderPlot() {
+	var xStart = 100;
+	var yStart = 500;
+	var xPos = 0;
+	var yPos = 0;
 	// axis
-	addLine(250, 250, 500, 0);
-	addLine(250, 250, 0, 250);
+	addLine(xStart, yStart, 350, 0);
+	addLine(xStart, yStart, 0, 225);
 	// data: f(t) = K*(1 - e^(-at))
-	for(var t = 0; t <= 30; t++) {
+	for(var t = 0; t < 30; t++) {
 		var res = 200 * (1 - Math.pow(Math.E, -0.10 * t));
-		addCircle(10 * t, Math.floor(res));
-		console.log('t: ' + t + ', res: ' + res);
+		xPos = xStart + 10 * t;
+		yPos = yStart - Math.floor(res);
+		addCircle(xPos, yPos);
 	}
 }
 function addCircle(xPos, yPos) {
-	var xStart = 250;
-	var yStart = 250;
 	var svg = document.getElementById('svg1');
 	var elm = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-	elm.setAttribute('cx', xStart + xPos);
-	elm.setAttribute('cy', yStart - yPos);
+	elm.setAttribute('cx', xPos);
+	elm.setAttribute('cy', yPos);
 	elm.setAttribute('r', 2);
 	svg.appendChild(elm);
+	console.log("xPos: " + xPos + ", yPos: " + yPos);
 }
 function addLine(xPos, yPos, xLen, yLen) {
 	var svg = document.getElementById('svg1');
