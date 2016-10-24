@@ -3,6 +3,7 @@ function loadNavigation() {
 	var menu = "<a href=\"https://geirmundm.github.io/index.html\">Home</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/firstorder.html\">First Order</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/sinewave.html\">Sine Wave</a>";
+	menu = menu + " | <a href=\"https://geirmundm.github.io/bode.html\">Bode Plot</a>";
 	document.getElementById('nav1').innerHTML = menu;
 }
 // index.html body onload event
