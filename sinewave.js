@@ -33,7 +33,7 @@ function plotValues() {
 		child = parent.firstChild;
 	}	
 	// Add axis 
-	addAxis(xStart, yStart, 350, 225); 	// function addAxis(xPos, yPos, xLen, yLen)
+	addAxis(xStart, yStart, 350, 225, "Time", "Amplitude"); 	// function addAxis(xPos, yPos, xLen, yLen)
 	// Add new points in plot
 	for(var i = 0; i < yValues.length; i++) {
 		addPoint(xStart + 5 * i, yValues[i]);

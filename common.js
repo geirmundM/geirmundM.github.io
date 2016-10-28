@@ -20,8 +20,19 @@ function sinewave_onload() {
 	loadNavigation();
 	sinewaveInit();
 }
+// bode.html body onload event
+function bode_onload() {
+	loadNavigation();
+	bodeInit();
+}
 // Axis for a plot
-function addAxis(xPos, yPos, xLen, yLen) {
+function addAxis(xPosition, yPosition, xLength, yLength, xText, yText) {
+	var xPos = xPosition || 100;
+	var yPos = yPosition || 250;
+	var xLen = xLength || 350;
+	var yLen = yLength || 225;
+	var xTxt = xText || "";
+	var yTxt = yText || "";
 	var svg = document.getElementById('svg1');
 	// Horizontal axis
 	var elm1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -41,6 +52,20 @@ function addAxis(xPos, yPos, xLen, yLen) {
 	elm2.setAttribute('stroke', 'black');
 	elm2.setAttribute('stroke-width', 2);
 	svg.appendChild(elm2);
+	// Name horizontal axis
+	var elm3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	elm3.setAttribute('x', xPos + xLen + 10);
+	elm3.setAttribute('y', yPos);
+	elm3.setAttribute('fill', 'black');
+	elm3.innerHTML = xTxt;
+	svg.appendChild(elm3);
+	// Name vertical axis
+	var elm4 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	elm4.setAttribute('x', xPos);
+	elm4.setAttribute('y', yPos - yLen - 10);
+	elm4.setAttribute('fill', 'black');
+	elm4.innerHTML = yTxt;
+	svg.appendChild(elm4);
 }
 // Adds a point, i.e. a circle
 function addPoint(xPos, yPos) {
@@ -50,6 +75,9 @@ function addPoint(xPos, yPos) {
 	var e = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 	e.setAttribute('cx', x);
 	e.setAttribute('cy', y);
-	e.setAttribute('r', 2);
+	e.setAttribute('r', 3);
+	e.setAttribute('stroke', 'blue');
+	e.setAttribute('stroke-width', 1);
+	e.setAttribute('fill', 'blue');
 	svg.appendChild(e);
 }

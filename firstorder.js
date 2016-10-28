@@ -4,7 +4,7 @@ function firstorderPlot() {
 	var xPos = 0;
 	var yPos = 0;
 	// Add axis
-	addAxis(xStart, yStart, 350, 225);
+	addAxis(100, 500, 350, 225, "Time", "Amplitude");
 	// data: f(t) = K*(1 - e^(-at))
 	for(var t = 0; t < 30; t++) {
 		var res = 200 * (1 - Math.pow(Math.E, -0.10 * t));
