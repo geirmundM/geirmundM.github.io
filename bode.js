@@ -1,8 +1,7 @@
 function bodeInit() {
-	bodePlot();
+	bodePlot(10, 3);
 }
-
-function bodePlot() {
+function bodePlot(freqStart, decades) {
 	// H(s) = 500 / (s + 500)
 	// Magnitude = 500 / sqrt(w2 + 250000)
 	// Setup plot area
@@ -10,6 +9,7 @@ function bodePlot() {
 	var yStart = 500;
 	var xLength = 700;
 	var yLength = 400;
+	var fStart = Math.pow(10, Math.floor(Math.log10(freqStart)));
 	// Data variables
 	var xPos = 0;
 	var yPos = 500;
@@ -18,23 +18,31 @@ function bodePlot() {
 	var db = 0.0;	
 	// Add axis
 	addAxis(xStart, yStart, xLength, 50 + yLength, "Frequency", "Amplitude");
-	//Vertical lines
+	// Vertical lines
 	bodeVertical(xPos, yPos - yLength, xLength - 100);
 	bodeVertical(xPos, yPos - yLength / 2, xLength - 100);
-	//Horizontal lines
-	for(var j = 0; j < 3; j++) {
+	// Horizontal lines
+	for(var j = 0; j < decades; j++) {
 		for(var i = 1; i < 10; i++) {
-			freq = Math.pow(10, j) * (10 + 10 * i);
-			xPos = 200 * (Math.log10(freq) - 1);
+			freq = Math.pow(10, j) * fStart * (1 + i); // f = [10, 20, 30, ...100, ...1k, ...10k]
+			xPos = 100 + ((xLength - 100) / decades) * (Math.log10(freq / fStart));
+			bodeHorizontal(xPos, yPos, yLength);
+			console.log("Axis, xPos: " + Number(xPos).toFixed(1) + ", Frequency: " + Number(freq).toFixed(1));
+		}
+		addText(xPos, yPos + 25, freq);
+	}
+	// Adding points
+	for(var j = 0; j < decades; j++) {
+		for(var i = 1; i <= 10; i++) {
+			freq = fStart * Math.pow(10, j) * Math.pow(10, i / 10);
+			xPos = 100 + ((xLength - 100) / decades) * (Math.log10(freq / fStart));
 			y = 500 / Math.sqrt(freq * freq + 500 * 500);
 			db = 20 * Math.log10(y);
-			bodeHorizontal(100 + xPos, yPos, yLength);
-			addPoint(100 + xPos, yStart - yLength - 10 * db);
-			console.log("xPos: " + Number(xPos).toFixed(1) + ", Frequency: " + Number(freq).toFixed(1), " y: " + Math.log10(freq) + ", db: " + Number(db).toFixed(3));
+			addPoint(xPos, yStart - yLength - 10 * db);
+			console.log("Data, xPos: " + Number(xPos).toFixed(1) + ", Frequency: " + Number(freq).toFixed(1), " y: " + Math.log10(freq) + ", db: " + Number(db).toFixed(3));
 		}
 	}
 }
-
 function bodeHorizontal(xPos, yPos, len) {
 	var x = xPos || 100;
 	var y = yPos || 100;

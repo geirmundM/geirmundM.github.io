@@ -53,19 +53,9 @@ function addAxis(xPosition, yPosition, xLength, yLength, xText, yText) {
 	elm2.setAttribute('stroke-width', 2);
 	svg.appendChild(elm2);
 	// Name horizontal axis
-	var elm3 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-	elm3.setAttribute('x', xPos + xLen + 10);
-	elm3.setAttribute('y', yPos);
-	elm3.setAttribute('fill', 'black');
-	elm3.innerHTML = xTxt;
-	svg.appendChild(elm3);
+	addText(xPos + xLen + 50, yPos, xTxt);
 	// Name vertical axis
-	var elm4 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-	elm4.setAttribute('x', xPos);
-	elm4.setAttribute('y', yPos - yLen - 10);
-	elm4.setAttribute('fill', 'black');
-	elm4.innerHTML = yTxt;
-	svg.appendChild(elm4);
+	addText(xPos, yPos - yLen - 25, yTxt);
 }
 // Adds a point, i.e. a circle
 function addPoint(xPos, yPos) {
@@ -80,4 +70,20 @@ function addPoint(xPos, yPos) {
 	e.setAttribute('stroke-width', 1);
 	e.setAttribute('fill', 'blue');
 	svg.appendChild(e);
+}
+// Axis for a plot
+function addText(xPosition, yPosition, Text) {
+	var xPos = xPosition || 100;
+	var yPos = yPosition || 250;
+	var txt = Text || "";
+	var svg = document.getElementById('svg1');
+	// Add svg text element
+	var elm = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	elm.setAttribute('x', xPos);
+	elm.setAttribute('y', yPos);
+	elm.setAttribute('fill', 'black');
+	elm.setAttribute('text-anchor', 'middle');
+	elm.setAttribute('alignment-baseline', 'central');
+	elm.innerHTML = txt;
+	svg.appendChild(elm);
 }
