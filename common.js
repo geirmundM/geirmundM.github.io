@@ -2,6 +2,7 @@
 function loadNavigation() {
 	var menu = "<a href=\"https://geirmundm.github.io/index.html\">Home</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/firstorder.html\">First Order</a>";
+	menu = menu + " | <a href=\"https://geirmundm.github.io/secondorder.html\">Second Order</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/sinewave.html\">Sine Wave</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/bode.html\">Bode Plot</a>";
 	document.getElementById('nav1').innerHTML = menu;
@@ -14,6 +15,11 @@ function index_onload() {
 function firstorder_onload() {
 	loadNavigation();
 	firstorderPlot();
+}
+// secondorder.html body onload event
+function secondorder_onload() {
+	loadNavigation();
+	secondorderPlot();
 }
 // sinewave.html body onload event
 function sinewave_onload() {
