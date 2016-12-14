@@ -24,7 +24,7 @@ function createValues() {
 }
 function plotValues() {
 	var xStart = 100;
-	var yStart = 250;
+	var yStart = 275;
 	// Remove old points in plot
 	var parent = document.getElementById('svg1');
 	var child = parent.firstChild;
