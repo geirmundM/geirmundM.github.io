@@ -7,25 +7,6 @@ function loadNavigation() {
 	menu = menu + " | <a href=\"https://geirmundm.github.io/bode.html\">Bode Plot</a>";
 	document.getElementById('nav1').innerHTML = menu;
 }
-// index.html body onload event
-function index_onload() {
-	loadNavigation();
-}
-// firstorder.html body onload event
-function firstorder_onload() {
-	loadNavigation();
-	firstorderPlot();
-}
-// secondorder.html body onload event
-function secondorder_onload() {
-	loadNavigation();
-	secondorderPlot();
-}
-// sinewave.html body onload event
-function sinewave_onload() {
-	loadNavigation();
-	sinewaveInit();
-}
 function bodePlot(freqStart, decades) {
 	// Setup plot area
 	var xStart = 100;

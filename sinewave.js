@@ -1,6 +1,8 @@
 var x = 0;
 var yValues = [];
-function sinewaveInit() {
+// sinewave.html body onload event
+window.onload = function() {
+	loadNavigation();
 	addPoint();
 	setInterval(main, 250);
 }

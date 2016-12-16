@@ -1,3 +1,8 @@
+// firstorder.html window onload event
+window.onload = function() {
+	loadNavigation();
+	firstorderPlot();
+}
 function firstorderPlot() {
 	var xStart = 100;
 	var yStart = 500;

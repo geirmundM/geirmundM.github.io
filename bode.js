@@ -9,7 +9,7 @@ function getAmplitudeDB(freq) {
     var f = freq || 1;
     var db = 0.0;
     var y = 0.0;
-    y = 500 / Math.sqrt(freq * freq + 500 * 500);
+    y = 500 / Math.sqrt(f * f + 500 * 500);
     db = 20 * Math.log10(y);
     return db;
 }
