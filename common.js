@@ -26,10 +26,46 @@ function sinewave_onload() {
 	loadNavigation();
 	sinewaveInit();
 }
-// bode.html body onload event
-function bode_onload() {
-	loadNavigation();
-	bodeInit();
+function bodePlot(freqStart, decades) {
+	// Setup plot area
+	var xStart = 100;
+	var yStart = 500;
+	var xLength = 700;
+	var yLength = 400;
+	var fStart = Math.pow(10, Math.floor(Math.log10(freqStart)));
+	// Data variables
+	var xPos = 0;
+	var yPos = 500;
+	var freq = 0;
+	var y = 0.0;
+	var db = 0.0;	
+	// Add axis
+	addAxis(xStart, yStart, xLength, yLength, "Frequency", "Amplitude");
+	// Vertical lines
+	addHorizontal(xPos, yPos - yLength, xLength - 100);
+	addHorizontal(xPos, yPos - yLength / 2, xLength - 100);
+	// Horizontal lines
+	for(var j = 0; j < decades; j++) {
+		for(var i = 1; i < 10; i++) {
+            // Calculate frequencies. Example: f = [10, 20, 30, ...100, ...1k, ...10k]
+			freq = Math.pow(10, j) * fStart * (1 + i);
+            // Calculate xPosition according to formula x = a + b * Math.log10(f)
+			xPos = 100 + ((xLength - 100) / decades) * (Math.log10(freq / fStart));
+			addVertical(xPos, yPos, yLength);
+			console.log("Axis, xPos: " + Number(xPos).toFixed(1) + ", Frequency: " + Number(freq).toFixed(1));
+		}
+		addText(xPos, yPos + 25, freq);
+	}
+	// Adding points
+	for(var j = 0; j < decades; j++) {
+		for(var i = 1; i <= 10; i++) {
+			freq = fStart * Math.pow(10, j) * Math.pow(10, i / 10);
+			xPos = 100 + ((xLength - 100) / decades) * (Math.log10(freq / fStart));
+            db = getAmplitudeDB(freq);
+			addPoint(xPos, yStart - yLength - 10 * db);
+			console.log("Data, xPos: " + Number(xPos).toFixed(1) + ", Frequency: " + Number(freq).toFixed(1), " y: " + Math.log10(freq) + ", db: " + Number(db).toFixed(3));
+		}
+	}
 }
 // Axis for a plot
 function addAxis(xPosition, yPosition, xLength, yLength, xText, yText) {
@@ -41,27 +77,13 @@ function addAxis(xPosition, yPosition, xLength, yLength, xText, yText) {
 	var yTxt = yText || "";
 	var svg = document.getElementById('svg1');
 	// Horizontal axis
-	var elm1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-	elm1.setAttribute('x1', xPos);
-	elm1.setAttribute('y1', yPos);
-	elm1.setAttribute('x2', xPos + xLen);
-	elm1.setAttribute('y2', yPos);
-	elm1.setAttribute('stroke', 'black');
-	elm1.setAttribute('stroke-width', 2);
-	svg.appendChild(elm1);
+    addHorizontal(xPos, yPos, xLen, 2)
 	// Vertical axis
-	var elm2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-	elm2.setAttribute('x1', xPos);
-	elm2.setAttribute('y1', yPos);
-	elm2.setAttribute('x2', xPos);
-	elm2.setAttribute('y2', yPos - yLen);
-	elm2.setAttribute('stroke', 'black');
-	elm2.setAttribute('stroke-width', 2);
-	svg.appendChild(elm2);
+    addVertical(xPos, yPos, yLen + 25, 2)
 	// Name horizontal axis
 	addText(xPos + xLen + 50, yPos, xTxt);
 	// Name vertical axis
-	addText(xPos, yPos - yLen - 25, yTxt);
+	addText(xPos, yPos - yLen - 50, yTxt);
 }
 // Adds a point, i.e. a circle
 function addPoint(xPos, yPos) {
@@ -92,4 +114,34 @@ function addText(xPosition, yPosition, Text) {
 	elm.setAttribute('alignment-baseline', 'central');
 	elm.innerHTML = txt;
 	svg.appendChild(elm);
+}
+function addVertical(xPos, yPos, len, thickness) {
+	var x = xPos || 100;
+	var y = yPos || 100;
+	var l = len || 100;
+    var t = thickness || 1;
+	var svg = document.getElementById('svg1');
+	var e = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+	e.setAttribute('x1', x);
+	e.setAttribute('y1', y);
+	e.setAttribute('x2', x);
+	e.setAttribute('y2', y - l);
+	e.setAttribute('stroke', 'black');
+	e.setAttribute('stroke-width', t);
+	svg.appendChild(e);
+}
+function addHorizontal(xPos, yPos, len, thickness) {
+	var x = xPos || 100;
+	var y = yPos || 100;
+	var l = len || 100;
+    var t = thickness || 1;
+	var svg = document.getElementById('svg1');
+	var e = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+	e.setAttribute('x1', x);
+	e.setAttribute('y1', y);
+	e.setAttribute('x2', x + l);
+	e.setAttribute('y2', y);
+	e.setAttribute('stroke', 'black');
+	e.setAttribute('stroke-width', t);
+	svg.appendChild(e);
 }
