@@ -5,6 +5,7 @@ function loadNavigation() {
 	menu = menu + " | <a href=\"https://geirmundm.github.io/secondorder.html\">Second Order</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/sinewave.html\">Sine Wave</a>";
 	menu = menu + " | <a href=\"https://geirmundm.github.io/bode.html\">Bode Plot</a>";
+	menu = menu + " | <a href=\"https://geirmundm.github.io/music.html\">Music</a>";
 	document.getElementById('nav1').innerHTML = menu;
 }
 function bodePlot(freqStart, decades) {
@@ -81,13 +82,15 @@ function addPoint(xPos, yPos) {
 	svg.appendChild(e);
 }
 // Axis for a plot
-function addText(xPosition, yPosition, Text) {
+function addText(xPosition, yPosition, Text, classCss) {
+    var cls = classCss || "cls1";
 	var xPos = xPosition || 100;
 	var yPos = yPosition || 250;
 	var txt = Text || "";
 	var svg = document.getElementById('svg1');
 	// Add svg text element
 	var elm = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	elm.setAttribute('class', cls);
 	elm.setAttribute('x', xPos);
 	elm.setAttribute('y', yPos);
 	elm.setAttribute('fill', 'black');

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>geirmundM</title>
+        <script src="common.js"></script>
+        <script src="music.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="div1">
+            <form id="frm1">
+                Tittel:
+                <input type="text" id="title" value="Tittel"><br/><br/>
+                Takter:
+                <select id="bars">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                </select><br/><br/>
+                <input type="radio" name="sheet" value="note" checked>Noter<br/>
+                <input type="radio" name="sheet" value="tab">Gitar tab<br/>
+                <input type="radio" name="sheet" value="chord">Gitar akkord<br/><br/>
+                <input type="button" value="Bekreft" onclick="draw()">
+            </form>
+        </div>
+    </body>
+</html>
